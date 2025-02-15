@@ -1,2 +1,3 @@
-# trading-web-auto-testing
-Automation testing for trading website
+# Trading Website Automation Testing Project
+
+This project automates the testing of a trading platform using Selenium.
