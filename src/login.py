@@ -1,11 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .constants import LOGIN_URL, ACCOUNT_ID, PASSWORD, PLACE_ORDER_BUTTON
+from utils.constants import LOGIN_URL, ACCOUNT_ID, PASSWORD, PLACE_ORDER_BUTTON
 
 def login(driver, account_id=ACCOUNT_ID, password=PASSWORD):
     try:
         driver.get(LOGIN_URL)
+
+        # Wait for login fields
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, "[data-testid='login-user-id']")))
 
         # Enter Account ID
         account_input = driver.find_element(By.CSS_SELECTOR, "[data-testid='login-user-id']")
@@ -18,6 +21,11 @@ def login(driver, account_id=ACCOUNT_ID, password=PASSWORD):
         # Click the Login button
         login_button = driver.find_element(By.CSS_SELECTOR, "[data-testid='login-submit']")
         login_button.click()
+
+        # Wait for the homepage to load after login
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located(By.CSS_SELECTOR, PLACE_ORDER_BUTTON))
+        print("Login successful!")
 
     except Exception as e:
         print(f"Error during login: {e}")
