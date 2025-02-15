@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.constants import (LIVE_BUY_PRICE, LIVE_SELL_PRICE)
+from .constants import (LIVE_BUY_PRICE, LIVE_SELL_PRICE)
 
 def get_live_price(driver, is_buy):
     """Gets last price from trade page."""
