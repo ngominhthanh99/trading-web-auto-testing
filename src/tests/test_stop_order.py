@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from src.utils.search_utils import search
 from src.utils.price_utils import get_live_price
-from src.orders import place_order
+from src.utils.orders_utils import place_order
 from src.utils.constants import TEST_SYMBOL, GOOD_TILL_CANCELLED, GOOD_TILL_DAY, PLACE_ORDER_BUTTON, SYMBOL_ID
 
 def test_place_stop_order(driver):
