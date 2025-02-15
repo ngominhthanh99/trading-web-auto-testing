@@ -24,7 +24,7 @@ def login(driver, account_id=ACCOUNT_ID, password=PASSWORD):
 
         # Wait for the homepage to load after login
         WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located(By.CSS_SELECTOR, PLACE_ORDER_BUTTON))
+            EC.presence_of_element_located((By.CSS_SELECTOR, PLACE_ORDER_BUTTON)))
         print("Login successful!")
 
     except Exception as e:

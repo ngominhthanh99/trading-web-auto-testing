@@ -2,8 +2,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from src.driver_setup import setup_driver
-from src.login import login
 from src.utils.search_utils import search
 from src.utils.price_utils import get_live_price
 from src.orders import place_order

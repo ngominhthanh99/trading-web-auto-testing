@@ -7,4 +7,4 @@ def search(driver, symbol):
     search_bar.clear()
     search_bar.send_keys(symbol)
     WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located(By.CSS_SELECTOR, "[data-testid='symbol-input-search-items']")).click()
+        EC.presence_of_element_located((By.CSS_SELECTOR, "[data-testid='symbol-input-search-items']"))).click()

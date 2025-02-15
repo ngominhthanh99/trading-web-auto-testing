@@ -66,7 +66,7 @@ def place_order(driver, order_type, units, price=None, stop_loss=None, take_prof
         
         # Click the Confirm button in the confirmation pop-up
         confirm_button = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(By.CSS_SELECTOR, CONFIRM_BUTTON))
+            EC.presence_of_element_located((By.CSS_SELECTOR, CONFIRM_BUTTON)))
         confirm_button.click()
         
         print("Order confirmed.")

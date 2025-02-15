@@ -8,7 +8,7 @@ def get_live_price(driver, is_buy):
     try:
         # Wait for element to load
         last_price_element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(By.CSS_SELECTOR, LIVE_SELL_PRICE))
+            EC.presence_of_element_located((By.CSS_SELECTOR, LIVE_SELL_PRICE)))
         if is_buy == 'true':
             last_price_element = driver.find_element(By.CSS_SELECTOR, LIVE_BUY_PRICE)
 
