@@ -1,18 +1,20 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from utils.constants import (LIVE_BUY_PRICE, LIVE_SELL_PRICE)
 
-def get_last_price(driver):
+def get_live_price(driver, is_buy):
     """Gets last price from trade page."""
     try:
         # Wait for element to load
-        WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, ".sc-ey6wxa-3 .sc-2l74dl-0")))
-        
+        last_price_element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located(By.CSS_SELECTOR, LIVE_SELL_PRICE))
+        if is_buy == 'true':
+            last_price_element = driver.find_element(By.CSS_SELECTOR, LIVE_BUY_PRICE)
+
         # Get last price from element's text
-        last_price_element = driver.find_element(By.CSS_SELECTOR, ".sc-ey6wxa-3 .sc-2l74dl-0")
-        last_price_text = last_price_element.text
-        last_price = float(last_price_text.replace(",", "").replace("$", ""))
+        last_price = float(last_price_element.text)
+        
         return last_price
 
     except Exception as e:
