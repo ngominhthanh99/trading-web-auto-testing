@@ -29,14 +29,14 @@ def test_place_market_order(driver):
         # Place BUY MARKET order with SL and TP
         buy_stop_loss = get_live_price(driver, "true") * 0.5  # 50% of last price
         buy_take_profit = get_live_price(driver, "true") * 1.5  # 150% of last price
-        place_order(driver, "BUY MARKET", TEST_ORDER_UNITS, stop_loss=buy_stop_loss, take_profit=buy_take_profit)
+        place_order(driver, "10", TEST_ORDER_UNITS, stop_loss=buy_stop_loss, take_profit=buy_take_profit)
 
         time.sleep(5)
 
         # Place SELL MARKET order with SL and TP
         sell_stop_loss = get_live_price(driver, "false") * 1.5  # 150% of last price
         sell_take_profit = get_live_price(driver, "false") * 0.5  # 50% of last price
-        place_order(driver, "SELL MARKET", TEST_ORDER_UNITS, stop_loss=sell_stop_loss, take_profit=sell_take_profit)
+        place_order(driver, "SELL MARKET", "0.5", stop_loss=sell_stop_loss, take_profit=sell_take_profit)
 
     except Exception as e:
         print(f"Error in test_place_market_order: {e}")
