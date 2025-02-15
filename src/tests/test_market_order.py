@@ -29,7 +29,7 @@ def test_place_market_order(driver):
         buy_take_profit = round(get_live_price(driver, "true") * 1.5, 2)  # 150% of last price
         place_order(driver, TEST_SYMBOL, "BUY", "1", stop_loss=buy_stop_loss, take_profit=buy_take_profit)
 
-        time.sleep(3)
+        time.sleep(5)
 
         # Place SELL MARKET order with SL and TP
         sell_stop_loss = round(get_live_price(driver, "false") * 1.5, 2)  # 150% of last price

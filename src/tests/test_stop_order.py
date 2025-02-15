@@ -28,43 +28,43 @@ def test_place_stop_order(driver):
         buy_stop_price = round(get_live_price(driver, "true") * 1.1, 2)
         place_order(driver, TEST_SYMBOL, "BUY STOP", "1", price=buy_stop_price, expiry="Good Till Cancelled")
         
-        time.sleep(3)
+        time.sleep(5)
 
         # Place BUY STOP order with SL and TP and expiry Good Till Cancelled
         buy_stop_price = round(get_live_price(driver, "true") * 1.1, 2)
         place_order(driver, TEST_SYMBOL, "BUY STOP", "2", price=buy_stop_price, stop_loss=buy_stop_price*0.5, take_profit=buy_stop_price*1.1, expiry="Good Till Cancelled")
         
-        time.sleep(3)
+        time.sleep(5)
 
         # Place BUY STOP order with no SL nor TP and expiry Good Till Day
         buy_stop_price = round(get_live_price(driver, "true") * 1.1, 2)
         place_order(driver, TEST_SYMBOL, "BUY STOP", "1", price=buy_stop_price, expiry="Good Till Day")
         
-        time.sleep(3)
+        time.sleep(5)
 
         # Place BUY STOP order with SL and TP and expiry Good Till Day
         buy_stop_price = round(get_live_price(driver, "true") * 1.1, 2)
         place_order(driver, TEST_SYMBOL, "BUY STOP", "2", price=buy_stop_price, stop_loss=buy_stop_price*0.5, take_profit=buy_stop_price*1.1, expiry="Good Till Day")
         
-        time.sleep(3)
+        time.sleep(5)
 
         # Place SELL STOP order with no SL nor TP and expiry Good Till Cancelled
         sell_stop_price = round(get_live_price(driver, "false") * 0.9, 2)
         place_order(driver, TEST_SYMBOL, "SELL STOP", "1", price=sell_stop_price, expiry="Good Till Cancelled")
         
-        time.sleep(3)
+        time.sleep(5)
 
         # Place SELL STOP order with SL and TP and expiry Good Till Cancelled
         sell_stop_price = round(get_live_price(driver, "false") * 0.9, 2)
         place_order(driver, TEST_SYMBOL, "SELL STOP", "2", price=sell_stop_price, stop_loss=sell_stop_price*1.1, take_profit=sell_stop_price*0.5, expiry="Good Till Cancelled")
         
-        time.sleep(3)
+        time.sleep(5)
 
         # Place SELL STOP order with no SL nor TP and expiry Good Till Day
         sell_stop_price = round(get_live_price(driver, "false") * 0.9, 2)
         place_order(driver, TEST_SYMBOL, "SELL STOP", "0.2", price=sell_stop_price, expiry="Good Till Day")
         
-        time.sleep(3)
+        time.sleep(5)
 
         # Place SELL STOP order with SL and TP and expiry Good Till Day
         sell_stop_price = round(get_live_price(driver, "false") * 0.9, 2)

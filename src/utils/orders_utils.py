@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 from .constants import (
     ORDER_TYPE_DROPDOWN, MARKET_ORDER_OPTION, STOP_ORDER_OPTION, LIMIT_ORDER_OPTION,
     VOLUME_INPUT, PRICE_INPUT, STOP_LOSS_INPUT, TAKE_PROFIT_INPUT, PLACE_ORDER_BUTTON,
@@ -32,7 +33,8 @@ def place_order(driver, symbol, order_type, units, price=None, stop_loss=None, t
         
         # Enter Units
         units_input = driver.find_element(By.CSS_SELECTOR, VOLUME_INPUT)
-        units_input.clear()
+        units_input.send_keys(Keys.CONTROL + "a")
+        units_input.send_keys(Keys.DELETE)
         units_input.send_keys(units)
         
         # Enter Price if applicable
