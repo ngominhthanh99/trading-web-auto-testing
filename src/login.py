@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.constants import LOGIN_URL, ACCOUNT_ID, PASSWORD, PLACE_ORDER_BUTTON
+from .utils.constants import LOGIN_URL, ACCOUNT_ID, PASSWORD, PLACE_ORDER_BUTTON
 
 def login(driver, account_id=ACCOUNT_ID, password=PASSWORD):
     try:

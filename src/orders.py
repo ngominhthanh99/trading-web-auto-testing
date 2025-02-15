@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.constants import (
+from .utils.constants import (
     ORDER_TYPE_DROPDOWN, MARKET_ORDER_OPTION, STOP_ORDER_OPTION, LIMIT_ORDER_OPTION,
     VOLUME_INPUT, PRICE_INPUT, STOP_LOSS_INPUT, TAKE_PROFIT_INPUT, PLACE_ORDER_BUTTON,
     CONFIRM_BUTTON, EXPIRY_DROPDOWN, SELL_BUTTON, BUY_BUTTON, TRADE_VOLUME_INFO
