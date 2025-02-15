@@ -7,7 +7,7 @@ from src.login import login
 from src.utils.search_utils import search
 from src.utils.price_utils import get_live_price
 from src.orders import place_order
-from src.utils.constants import TEST_SYMBOL, TEST_ORDER_UNITS, GOOD_TILL_CANCELLED, GOOD_TILL_DAY, PLACE_ORDER_BUTTON
+from src.utils.constants import TEST_SYMBOL, TEST_ORDER_UNITS, GOOD_TILL_CANCELLED, GOOD_TILL_DAY, PLACE_ORDER_BUTTON, SYMBOL_ID
 
 def test_place_limit_order(driver):
     """Tests Limit order."""
@@ -23,7 +23,7 @@ def test_place_limit_order(driver):
         # Check if Place Order button is disabled
         is_disable = place_order_button.get_attribute("disabled")
         if is_disable == 'true':
-            symbol = driver.find_element(By.CSS_SELECTOR, "[data-testid='symbol-overview-id']").text
+            symbol = driver.find_element(By.CSS_SELECTOR, SYMBOL_ID).text
             raise Exception(f"{symbol}: Market Closed")
 
         # Place BUY LIMIT order

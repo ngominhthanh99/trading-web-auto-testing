@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from utils.constants import (
     ORDER_TYPE_DROPDOWN, MARKET_ORDER_OPTION, STOP_ORDER_OPTION, LIMIT_ORDER_OPTION,
     VOLUME_INPUT, PRICE_INPUT, STOP_LOSS_INPUT, TAKE_PROFIT_INPUT, PLACE_ORDER_BUTTON,
-    CONFIRM_BUTTON, EXPIRY_DROPDOWN, SELL_BUTTON, BUY_BUTTON
+    CONFIRM_BUTTON, EXPIRY_DROPDOWN, SELL_BUTTON, BUY_BUTTON, TRADE_VOLUME_INFO
 )
 
 def place_order(driver, order_type, units, price=None, stop_loss=None, take_profit=None, expiry=None):
@@ -57,7 +57,7 @@ def place_order(driver, order_type, units, price=None, stop_loss=None, take_prof
             expiry_option = driver.find_element(By.CSS_SELECTOR, expiry)
             expiry_option.click()
         
-        size = driver.find_element(By.CSS_SELECTOR, "[data-testid='trade-volume-info-value']").text
+        size = driver.find_element(By.CSS_SELECTOR, TRADE_VOLUME_INFO).text
         print(f"Placing {order_type} order with Units = {units}, Size = {size}, Price = {price}, Stop Loss = {stop_loss}, Take Profit = {take_profit}, Expiry = {expiry}.")
         
         # Place Order
