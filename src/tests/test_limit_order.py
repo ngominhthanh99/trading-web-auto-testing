@@ -5,7 +5,7 @@ import time
 from src.utils.search_utils import search
 from src.utils.price_utils import get_live_price
 from src.utils.orders_utils import place_order
-from src.utils.constants import TEST_SYMBOL, GOOD_TILL_CANCELLED, GOOD_TILL_DAY, PLACE_ORDER_BUTTON, SYMBOL_ID
+from src.utils.constants import TEST_SYMBOL, PLACE_ORDER_BUTTON, SYMBOL_ID
 
 def test_place_limit_order(driver):
     """Tests Limit order."""
@@ -25,50 +25,50 @@ def test_place_limit_order(driver):
             raise Exception(f"{symbol}: Market Closed")
 
         # Place BUY LIMIT order with no SL nor TP and expiry Good Till Cancelled
-        buy_limit_price = get_live_price(driver, "true") * 0.9
-        place_order(driver, "BUY LIMIT", "1", price=buy_limit_price, expiry=GOOD_TILL_CANCELLED)
+        buy_limit_price = round(get_live_price(driver, "true") * 0.9, 2)
+        place_order(driver, TEST_SYMBOL, "BUY LIMIT", "1", price=buy_limit_price, expiry="Good Till Cancelled")
         
-        time.sleep(5)
+        time.sleep(3)
 
         # Place BUY LIMIT order with SL and TP and expiry Good Till Cancelled
-        buy_limit_price = get_live_price(driver, "true") * 0.9
-        place_order(driver, "BUY LIMIT", "2", price=buy_limit_price, stop_loss=buy_limit_price*0.5, take_profit=buy_limit_price*1.1, expiry=GOOD_TILL_CANCELLED)
+        buy_limit_price = round(get_live_price(driver, "true") * 0.9, 2)
+        place_order(driver, TEST_SYMBOL, "BUY LIMIT", "2", price=buy_limit_price, stop_loss=buy_limit_price*0.5, take_profit=buy_limit_price*1.1, expiry="Good Till Cancelled")
         
-        time.sleep(5)
+        time.sleep(3)
 
         # Place BUY LIMIT order with no SL nor TP and expiry Good Till Day
-        buy_limit_price = get_live_price(driver, "true") * 0.9
-        place_order(driver, "BUY LIMIT", "1", price=buy_limit_price, expiry=GOOD_TILL_DAY)
+        buy_limit_price = round(get_live_price(driver, "true") * 0.9, 2)
+        place_order(driver, TEST_SYMBOL, "BUY LIMIT", "1", price=buy_limit_price, expiry="Good Till Day")
         
-        time.sleep(5)
+        time.sleep(3)
 
         # Place BUY LIMIT order with SL and TP and expiry Good Till Day
-        buy_limit_price = get_live_price(driver, "true") * 0.9
-        place_order(driver, "BUY LIMIT", "2", price=buy_limit_price, stop_loss=buy_limit_price*0.5, take_profit=buy_limit_price*1.1, expiry=GOOD_TILL_DAY)
+        buy_limit_price = round(get_live_price(driver, "true") * 0.9, 2)
+        place_order(driver, TEST_SYMBOL, "BUY LIMIT", "2", price=buy_limit_price, stop_loss=buy_limit_price*0.5, take_profit=buy_limit_price*1.1, expiry="Good Till Day")
         
-        time.sleep(5)
+        time.sleep(3)
 
         # Place SELL LIMIT order with no SL nor TP and expiry Good Till Cancelled
-        sell_limit_price = get_live_price(driver, "false") * 1.1
-        place_order(driver, "SELL LIMIT", "1", price=sell_limit_price, expiry=GOOD_TILL_CANCELLED)
+        sell_limit_price = round(get_live_price(driver, "false") * 1.1, 2)
+        place_order(driver, TEST_SYMBOL, "SELL LIMIT", "1", price=sell_limit_price, expiry="Good Till Cancelled")
         
-        time.sleep(5)
+        time.sleep(3)
 
         # Place SELL LIMIT order with SL and TP and expiry Good Till Cancelled
-        sell_limit_price = get_live_price(driver, "false") * 1.1
-        place_order(driver, "SELL LIMIT", "2", price=sell_limit_price, stop_loss=sell_limit_price*1.1, take_profit=sell_limit_price*0.5, expiry=GOOD_TILL_CANCELLED)
+        sell_limit_price = round(get_live_price(driver, "false") * 1.1, 2)
+        place_order(driver, TEST_SYMBOL, "SELL LIMIT", "2", price=sell_limit_price, stop_loss=sell_limit_price*1.1, take_profit=sell_limit_price*0.5, expiry="Good Till Cancelled")
         
-        time.sleep(5)
+        time.sleep(3)
 
         # Place SELL LIMIT order with no SL nor TP and expiry Good Till Day
-        sell_limit_price = get_live_price(driver, "false") * 1.1
-        place_order(driver, "SELL LIMIT", "0.2", price=sell_limit_price, expiry=GOOD_TILL_DAY)
+        sell_limit_price = round(get_live_price(driver, "false") * 1.1, 2)
+        place_order(driver, TEST_SYMBOL, "SELL LIMIT", "0.2", price=sell_limit_price, expiry="Good Till Day")
         
-        time.sleep(5)
+        time.sleep(3)
 
         # Place SELL LIMIT order with SL and TP and expiry Good Till Day
-        sell_limit_price = get_live_price(driver, "false") * 1.1
-        place_order(driver, "SELL LIMIT", "2", price=sell_limit_price, stop_loss=sell_limit_price*1.1, take_profit=sell_limit_price*0.5, expiry=GOOD_TILL_DAY)
+        sell_limit_price = round(get_live_price(driver, "false") * 1.1, 2)
+        place_order(driver, TEST_SYMBOL, "SELL LIMIT", "2", price=sell_limit_price, stop_loss=sell_limit_price*1.1, take_profit=sell_limit_price*0.5, expiry="Good Till Day")
         
     except Exception as e:
         print(f"Error in test_place_limit_order: {e}")

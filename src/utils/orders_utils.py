@@ -4,10 +4,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from .constants import (
     ORDER_TYPE_DROPDOWN, MARKET_ORDER_OPTION, STOP_ORDER_OPTION, LIMIT_ORDER_OPTION,
     VOLUME_INPUT, PRICE_INPUT, STOP_LOSS_INPUT, TAKE_PROFIT_INPUT, PLACE_ORDER_BUTTON,
-    CONFIRM_BUTTON, EXPIRY_DROPDOWN, SELL_BUTTON, BUY_BUTTON, TRADE_VOLUME_INFO
+    CONFIRM_BUTTON, EXPIRY_DROPDOWN, SELL_BUTTON, BUY_BUTTON, TRADE_VOLUME_INFO,
+    GOOD_TILL_CANCELLED, GOOD_TILL_DAY
 )
+from src.tests.test_validations import validate_notifications
+import time
 
-def place_order(driver, order_type, units, price=None, stop_loss=None, take_profit=None, expiry=None):
+def place_order(driver, symbol, order_type, units, price=None, stop_loss=None, take_profit=None, expiry=None):
     """Places an order with the given parameters."""
     try:
         # Determine Buy/Sell
@@ -52,9 +55,13 @@ def place_order(driver, order_type, units, price=None, stop_loss=None, take_prof
         
         # Select Expiry if applicable
         if expiry is not None:
+            
             expiry_dropdown = driver.find_element(By.CSS_SELECTOR, EXPIRY_DROPDOWN)
             expiry_dropdown.click()
-            expiry_option = driver.find_element(By.CSS_SELECTOR, expiry)
+            if expiry == "Good Till Cancelled":
+                expiry_option = driver.find_element(By.CSS_SELECTOR, GOOD_TILL_CANCELLED)
+            else:
+                expiry_option = driver.find_element(By.CSS_SELECTOR, GOOD_TILL_DAY)
             expiry_option.click()
         
         size = driver.find_element(By.CSS_SELECTOR, TRADE_VOLUME_INFO).text
@@ -70,6 +77,11 @@ def place_order(driver, order_type, units, price=None, stop_loss=None, take_prof
         confirm_button.click()
         
         print("Order confirmed.")
+
+        time.sleep(1)
+
+        # Validate notification
+        validate_notifications(driver, symbol, order_type, size, units, price, stop_loss, take_profit)
     
     except Exception as e:
         print(f"Error placing {order_type} order: {e}")

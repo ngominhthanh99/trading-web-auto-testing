@@ -12,7 +12,7 @@ def main():
     try:
         # Log in
         login(driver)
-        time.sleep(5)
+        time.sleep(1)
 
         # Test market order
         test_place_market_order(driver)

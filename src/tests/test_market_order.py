@@ -25,16 +25,16 @@ def test_place_market_order(driver):
             raise Exception(f"{symbol}: Market Closed")
 
         # Place BUY MARKET order with SL and TP
-        buy_stop_loss = get_live_price(driver, "true") * 0.5  # 50% of last price
-        buy_take_profit = get_live_price(driver, "true") * 1.5  # 150% of last price
-        place_order(driver, "BUY", "1", stop_loss=buy_stop_loss, take_profit=buy_take_profit)
+        buy_stop_loss = round(get_live_price(driver, "true") * 0.5, 2)  # 50% of last price
+        buy_take_profit = round(get_live_price(driver, "true") * 1.5, 2)  # 150% of last price
+        place_order(driver, TEST_SYMBOL, "BUY", "1", stop_loss=buy_stop_loss, take_profit=buy_take_profit)
 
-        time.sleep(5)
+        time.sleep(3)
 
         # Place SELL MARKET order with SL and TP
-        sell_stop_loss = get_live_price(driver, "false") * 1.5  # 150% of last price
-        sell_take_profit = get_live_price(driver, "false") * 0.5  # 50% of last price
-        place_order(driver, "SELL", "0.5", stop_loss=sell_stop_loss, take_profit=sell_take_profit)
+        sell_stop_loss = round(get_live_price(driver, "false") * 1.5, 2)  # 150% of last price
+        sell_take_profit = round(get_live_price(driver, "false") * 0.5, 2)  # 50% of last price
+        place_order(driver, TEST_SYMBOL, "SELL", "0.5", stop_loss=sell_stop_loss, take_profit=sell_take_profit)
 
     except Exception as e:
         print(f"Error in test_place_market_order: {e}")
