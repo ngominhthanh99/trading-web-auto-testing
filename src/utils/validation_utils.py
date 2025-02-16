@@ -1,12 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import requests
 import re
-from src.utils.constants import (NOTIFICATION_BOX, NOTIFICATION_TITLE, NOTIFICATION_DESCRIPTION,
-                                 BEARER_TOKEN)
+from .constants import NOTIFICATION_BOX, NOTIFICATION_TITLE, NOTIFICATION_DESCRIPTION
+from src.models.order import Order
 
-def validate_notification(driver, order_details):
+def validate_notification(driver, order: Order):
     """Validate order details with notification."""
     try:
         # Wait for the notification pop-up to appear
@@ -17,7 +16,7 @@ def validate_notification(driver, order_details):
         print(f"Notification - Title: {notification_title}. Description: {notification_description}")
 
         if notification_description:   
-            validation_passed = compare_notification_with_order_details(notification_description, order_details)
+            validation_passed = compare_notification_with_order_details(notification_description, order)
 
             if validation_passed:
                 print("Validation passed: notification matched with order details.")
@@ -36,7 +35,7 @@ def get_notification_details(driver):
 
     return notification_title, notification_description
 
-def compare_notification_with_order_details(message, order_details):
+def compare_notification_with_order_details(message, order: Order):
     # Mapping of fields to their labels in notification
     labels = {
         "symbol": "",
@@ -50,32 +49,34 @@ def compare_notification_with_order_details(message, order_details):
         result = True
         # Symbol
         noti_symbol = re.match(r"^[^.]+\.\w+", message).group(0)
-        if noti_symbol != order_details["symbol"]:
-            print(f"Wrong Symbol: Expected {value}, Found {noti_symbol}.")
+        if noti_symbol != order.symbol:
+            print(f"Wrong Symbol: Expected {order.symbol}, Found {noti_symbol}.")
             result = False
 
         # Order Type
-        noti_order_type = re.search(r" - ([A-Z ]+) ORDER", message).group(1).strip()
-        if noti_order_type != order_details["order_type"]:
-            print(f"Wrong Order Type: Expect {order_details['order_type']}, Found {noti_order_type}.")
+        match = re.search(r" - ([A-Z ]+ ORDER)", message)
+        noti_order_type = match.group(1).replace(" ORDER", "").strip() if match else None
+        if noti_order_type != order.order_type:
+            print(f"Wrong Order Type: Expect {order.order_type}, Found {noti_order_type}.")
             result = False
 
         # Other fields
-        for key, value in order_details.items():
-            if key in ["symbol","order_type"] or value is None:
-                continue  # Skip symbol, order_type, and None values
+        for key, value in order.__dict__.items():
+            if key in ["symbol","order_type","expiry"] or value is None:
+                continue
 
             label = labels.get(key)
             search_string = f"{label} {value}"
 
             # Check if search string exists in the notification
             if search_string not in message:
-                actual_value = re.search(f"{label} ([\d\.]+)", message).group(1)
+                match = re.search(f"{label} (\d+(\.\d+)?)", message)
+                actual_value = match.group(1) if match else None
                 print(f"Wrong {label}: Expected {value}, Found {actual_value}.")
                 result = False
 
         return result
     
     except Exception as e:
-        print(f"Error validating notifications: {e}")
+        print(f"Error validating notification: {e}")
         raise

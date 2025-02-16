@@ -6,6 +6,7 @@ from src.utils.search_utils import search
 from src.utils.price_utils import get_live_price
 from src.utils.orders_utils import place_order
 from src.utils.constants import TEST_SYMBOL, PLACE_ORDER_BUTTON, SYMBOL_ID
+from src.models.order import Order
 
 def test_place_market_order(driver):
     """Tests Market order."""
@@ -25,16 +26,16 @@ def test_place_market_order(driver):
             raise Exception(f"{symbol}: Market Closed")
 
         # Place BUY MARKET order with SL and TP
-        buy_stop_loss = round(get_live_price(driver, "true") * 0.5, 2)  # 50% of last price
-        buy_take_profit = round(get_live_price(driver, "true") * 1.5, 2)  # 150% of last price
-        place_order(driver, TEST_SYMBOL, "BUY", "1", stop_loss=buy_stop_loss, take_profit=buy_take_profit)
+        buy_stop_loss = round(get_live_price(driver, "true") * 0.5, 2)
+        buy_take_profit = round(get_live_price(driver, "true") * 1.5, 2)
+        place_order(driver, Order(TEST_SYMBOL, "BUY", units="1", stop_loss=buy_stop_loss, take_profit=buy_take_profit))
 
         time.sleep(5)
 
         # Place SELL MARKET order with SL and TP
-        sell_stop_loss = round(get_live_price(driver, "false") * 1.5, 2)  # 150% of last price
-        sell_take_profit = round(get_live_price(driver, "false") * 0.5, 2)  # 50% of last price
-        place_order(driver, TEST_SYMBOL, "SELL", "0.5", stop_loss=sell_stop_loss, take_profit=sell_take_profit)
+        sell_stop_loss = round(get_live_price(driver, "false") * 1.5, 2)
+        sell_take_profit = round(get_live_price(driver, "false") * 0.5, 2)
+        place_order(driver, Order(TEST_SYMBOL, "SELL", units="0.5", stop_loss=sell_stop_loss, take_profit=sell_take_profit))
 
     except Exception as e:
         print(f"Error in test_place_market_order: {e}")
