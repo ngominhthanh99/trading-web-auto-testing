@@ -24,4 +24,4 @@ def test_bulk_delete(driver):
 
     except Exception as e:
         print(f"Error placing {test_bulk_delete} order: {e}")
-    raise    
+        raise    

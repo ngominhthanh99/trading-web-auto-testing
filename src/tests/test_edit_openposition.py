@@ -10,15 +10,17 @@ def edit_open_position(driver):
     try:
         openposition = driver.find_element(By.CSS_SELECTOR, OPEN_POSITION)
         openposition.click()
+        time.sleep(1)
     
         button_edit = driver.find_element(By.CSS_SELECTOR, EDIT_POSITION)
         button_edit.click()
-        time.sleep(1)
+
     
         editSL = driver.find_element(By.CSS_SELECTOR, "[data-testid='edit-input-stoploss-price-decrease']")
-        for _ in range(20):
+        for _ in range(10):
             editSL.click()
         print("Order confirmed.")
+
 
         confirm_button = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_POSITION_UPDATE)))
@@ -32,4 +34,4 @@ def edit_open_position(driver):
     
     except Exception as e:
         print(f"Error placing edit_open_position order: {e}")
-    raise
+        raise

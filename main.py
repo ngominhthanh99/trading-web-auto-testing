@@ -19,18 +19,6 @@ def main():
         # Log in
         login(driver)
         time.sleep(5)
-             
-        # Test edit open position
-        edit_open_position(driver)
-        time.sleep(5)
-
-        # Test partal close
-        test_patial_close(driver)
-        time.sleep(5)
-
-        # Test close position
-        test_close_position(driver)
-        time.sleep(5)
 
         # Test market order
         test_place_market_order(driver)
@@ -42,6 +30,18 @@ def main():
 
         # Test stop order
         test_place_stop_order(driver)
+        time.sleep(5)
+
+        # Test edit open position
+        edit_open_position(driver)
+        time.sleep(5)
+
+        # Test partal close
+        test_patial_close(driver)
+        time.sleep(5)
+
+        # Test close position
+        test_close_position(driver)
         time.sleep(5)
 
         #Test edit pending order
