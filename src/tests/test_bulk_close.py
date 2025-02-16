@@ -4,14 +4,14 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from src.utils.constants import (BULK_CLOSE_DROPDOWN, BULK_CLOSE_ALL, 
 BULK_CLOSE_LOSS, BULK_CLOSE_PROFIT, BULK_CLOSE_PROFIT_CONFIRM, 
-BULK_CLOSE_LOSS_CONFIRM, BULK_CLOSE_ALL_CONFIRM, OPEN_POSITION
+BULK_CLOSE_LOSS_CONFIRM, BULK_CLOSE_ALL_CONFIRM, OPEN_POSITIONS_TAB
 )
 
 
 
 def test_bulk_close(driver):
     try:
-        openposition = driver.find_element(By.CSS_SELECTOR, OPEN_POSITION)
+        openposition = driver.find_element(By.CSS_SELECTOR, OPEN_POSITIONS_TAB)
         openposition.click()
 
         bulk_close = driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_DROPDOWN)

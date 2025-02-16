@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 from src.utils.price_utils import get_live_price
 from src.utils.constants import (
-    PENDING_POSITION, EDIT_ORDER, EDIT_ORDER_UPDATE, EDIT_ORDER_UPDATE_CONFIRM,
+    PENDING_POSITIONS_TAB, EDIT_ORDER, EDIT_ORDER_UPDATE, EDIT_ORDER_UPDATE_CONFIRM,
     EDIT_GOOD_TILL_CANCELLED, EDIT_GOOD_TILL_DAY, EDIT_EXPIRY_DROPDOWN,
     EDIT_ORDER_PRICE_INPUT, EDIT_ORDER_SL_INPUT, EDIT_ORDER_TP_INPUT, EDIT_ORDER_SL_POINT, EDIT_ORDER_TP_POINT
 )
@@ -20,7 +20,7 @@ new_expiry = 'Good Till Day'
 
 def test_edit_pending_order(driver):
     try:
-        pendingposition = driver.find_element(By.CSS_SELECTOR, PENDING_POSITION)
+        pendingposition = driver.find_element(By.CSS_SELECTOR, PENDING_POSITIONS_TAB)
         pendingposition.click()
         
         edit_button = WebDriverWait(driver, 10).until(

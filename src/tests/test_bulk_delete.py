@@ -3,12 +3,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from src.utils.constants import BULK_DELETE, BULK_DELETE_CONFIRM
-from src.utils.constants import PENDING_POSITION
+from src.utils.constants import PENDING_POSITIONS_TAB
 
 
 def test_bulk_delete(driver):
     try:
-        pendingposition = driver.find_element(By.CSS_SELECTOR, PENDING_POSITION)
+        pendingposition = driver.find_element(By.CSS_SELECTOR, PENDING_POSITIONS_TAB)
         pendingposition.click()
 
         bulk_delete = driver.find_element(By.CSS_SELECTOR, BULK_DELETE)

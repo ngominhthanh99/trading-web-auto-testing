@@ -6,9 +6,9 @@ from src.tests.test_stop_order import test_place_stop_order
 from src.tests.test_close_position import test_close_position
 from src.tests.test_bulk_close import test_bulk_close
 from src.tests.test_bulk_delete import test_bulk_delete
-from src.tests.test_edit_openposition import edit_open_position
+from src.tests.test_edit_open_position import edit_open_position
 from src.tests.test_partial_close import test_patial_close
-from src.tests.test_edit_pendingorder import test_edit_pending_order
+from src.tests.test_edit_pending_order import test_edit_pending_order
 import time
 
 def main():
@@ -18,17 +18,17 @@ def main():
     try:
         # Log in
         login(driver)
-        time.sleep(5)
+        time.sleep(1)
 
-        # Test market order
+        # Test market order and notification, open position validation
         test_place_market_order(driver)
         time.sleep(5)
 
-        # Test limit order
+        # Test limit order and notification, open position validation
         test_place_limit_order(driver)
         time.sleep(5)
 
-        # Test stop order
+        # Test stop order and notification, open position validation
         test_place_stop_order(driver)
         time.sleep(5)
 
