@@ -14,16 +14,16 @@ def main():
         login(driver)
         time.sleep(1)
 
-        # Test market order
+        # Test market order and notification, open position validation
         test_place_market_order(driver)
         time.sleep(5)
 
-        # # Test limit order
-        # test_place_limit_order(driver)
-        # time.sleep(5)
+        # Test limit order and notification, open position validation
+        test_place_limit_order(driver)
+        time.sleep(5)
 
-        # # Test stop order
-        # test_place_stop_order(driver)
+        # Test stop order and notification, open position validation
+        test_place_stop_order(driver)
 
     except Exception as e:
         print(f"Unexpected error in main execution: {e}")

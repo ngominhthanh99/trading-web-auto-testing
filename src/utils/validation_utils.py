@@ -3,11 +3,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
 import requests
-from .constants import (NOTIFICATION_BOX, NOTIFICATION_TITLE, NOTIFICATION_DESCRIPTION, OPEN_POSITIONS_API_URL, BEARER_TOKEN,
+from .constants import (NOTIFICATION_BOX, NOTIFICATION_TITLE, NOTIFICATION_DESCRIPTION, OPEN_POSITIONS_API_URL,
                         ORDER_HISTORY_API_URL, OPEN_POSITIONS_TABLE, ORDER_HISTORY_TABLE, OPEN_POSITIONS_TAB, ORDER_HISTORY_TAB)
 from src.models.order import Order
 from datetime import datetime, time
 from datetime import datetime, time, timezone
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+bearer_token = os.getenv('BEARER_TOKEN')
 
 def validate_notification(driver, order: Order):
     """Validate order details with notification."""
@@ -41,7 +46,7 @@ def validate_open_position(driver, order: Order):
 
         api_url = OPEN_POSITIONS_API_URL + "?symbol=" + order.symbol
 
-        latest_order = fetch_latest_order(api_url, BEARER_TOKEN, 0)
+        latest_order = fetch_latest_order(api_url, bearer_token, 0)
         if not latest_order:
             return
         
@@ -75,7 +80,7 @@ def validate_order_history(driver, order: Order):
 
         print(f"{api_url}")
 
-        latest_order = fetch_latest_order(api_url, BEARER_TOKEN, 0)
+        latest_order = fetch_latest_order(api_url, bearer_token, 0)
         if not latest_order:
             return
         
