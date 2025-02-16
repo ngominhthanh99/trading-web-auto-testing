@@ -2,14 +2,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from .utils.constants import LOGIN_URL, PLACE_ORDER_BUTTON
-from dotenv import load_dotenv
-import os
+from .utils.credentials import ACCOUNT_ID, PASSWORD
 
-load_dotenv()
-account_id = os.getenv('ACCOUNT_ID')
-password = os.getenv('PASSWORD')
-
-def login(driver, account_id=account_id, password=password):
+def login(driver, account_id=ACCOUNT_ID, password=PASSWORD):
     try:
         driver.get(LOGIN_URL)
 
