@@ -2,17 +2,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from src.utils.constants import BULK_CLOSE_DROPDOWN
-from src.utils.constants import BULK_CLOSE_ALL
-from src.utils.constants import BULK_CLOSE_LOSS
-from src.utils.constants import BULK_CLOSE_PROFIT
-from src.utils.constants import BULK_CLOSE_PROFIT_CONFIRM
-from src.utils.constants import BULK_CLOSE_LOSS_CONFIRM
-from src.utils.constants import BULK_CLOSE_ALL_CONFIRM
+from src.utils.constants import (BULK_CLOSE_DROPDOWN, BULK_CLOSE_ALL, 
+BULK_CLOSE_LOSS, BULK_CLOSE_PROFIT, BULK_CLOSE_PROFIT_CONFIRM, 
+BULK_CLOSE_LOSS_CONFIRM, BULK_CLOSE_ALL_CONFIRM, OPEN_POSITION
+)
+
 
 
 def test_bulk_close(driver):
     try:
+        openposition = driver.find_element(By.CSS_SELECTOR, OPEN_POSITION)
+        openposition.click()
+
         bulk_close = driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_DROPDOWN)
         bulk_close.click()
     
@@ -23,6 +24,7 @@ def test_bulk_close(driver):
             EC.presence_of_element_located((By.CSS_SELECTOR, BULK_CLOSE_ALL_CONFIRM)))
         confirm_button.click()
         time.sleep(5)
+        print("Order confirmed.")
 
         driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_PROFIT).click()
         
@@ -31,6 +33,7 @@ def test_bulk_close(driver):
             EC.presence_of_element_located((By.CSS_SELECTOR, BULK_CLOSE_LOSS_CONFIRM)))
         confirm_button.click()
         time.sleep(5)
+        print("Order confirmed.")
 
         driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_LOSS).click()
 
@@ -39,6 +42,7 @@ def test_bulk_close(driver):
             EC.presence_of_element_located((By.CSS_SELECTOR, BULK_CLOSE_PROFIT_CONFIRM)))
         confirm_button.click()
         time.sleep(5)
+        print("Order confirmed.")
         
     
     except Exception as e:
