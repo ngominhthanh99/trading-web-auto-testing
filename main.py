@@ -18,12 +18,12 @@ def main():
         test_place_market_order(driver)
         time.sleep(5)
 
-        # Test limit order
-        test_place_limit_order(driver)
-        time.sleep(5)
+        # # Test limit order
+        # test_place_limit_order(driver)
+        # time.sleep(5)
 
-        # Test stop order
-        test_place_stop_order(driver)
+        # # Test stop order
+        # test_place_stop_order(driver)
 
     except Exception as e:
         print(f"Unexpected error in main execution: {e}")

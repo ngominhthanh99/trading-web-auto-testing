@@ -9,7 +9,7 @@ from .constants import (
     GOOD_TILL_CANCELLED, GOOD_TILL_DAY
 )
 import time
-from .validation_utils import validate_notification
+from .validation_utils import validate_notification, validate_open_position, validate_order_history
 from src.models.order import Order
 
 def place_order(driver, order: Order):
@@ -85,6 +85,11 @@ def place_order(driver, order: Order):
 
         # Validate notification
         validate_notification(driver, order)
+
+        time.sleep(1)
+
+        # Validate open position
+        validate_open_position(driver, order)
     
     except Exception as e:
         print(f"Error placing {order.order_type} order: {e}")
