@@ -8,7 +8,7 @@ from .constants import (
     CONFIRM_BUTTON, EXPIRY_DROPDOWN, SELL_BUTTON, BUY_BUTTON, TRADE_VOLUME_INFO,
     GOOD_TILL_CANCELLED, GOOD_TILL_DAY
 )
-from src.tests.test_validations import validate_notifications
+from .validation_utils import validate_notification
 import time
 
 def place_order(driver, symbol, order_type, units, price=None, stop_loss=None, take_profit=None, expiry=None):
@@ -83,7 +83,16 @@ def place_order(driver, symbol, order_type, units, price=None, stop_loss=None, t
         time.sleep(1)
 
         # Validate notification
-        validate_notifications(driver, symbol, order_type, size, units, price, stop_loss, take_profit)
+        order_details = {
+                "symbol": symbol,
+                "order_type": order_type,
+                "size": size,
+                "units": units,
+                "price": price,
+                "stop_loss": stop_loss,
+                "take_profit": take_profit
+            }
+        validate_notification(driver, order_details)
     
     except Exception as e:
         print(f"Error placing {order_type} order: {e}")
