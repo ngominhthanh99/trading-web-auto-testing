@@ -56,7 +56,7 @@ def validate_open_position(driver, order: Order):
         raise
 
 def validate_order_history(driver, order: Order):
-    """Validate order details with order history data."""
+    """Validate closed order with order history data."""
     try:
         # Click on Order History
         driver.find_element(By.CSS_SELECTOR, ORDER_HISTORY_TAB).click()
@@ -83,10 +83,10 @@ def validate_order_history(driver, order: Order):
         validation_passed = compare_api_response_with_order_details(latest_order, order)
 
         if validation_passed:
-                print("Validation passed: open position matched with order details.")
+                print("Validation passed: order history matched with closed order.")
 
     except Exception as e:
-        print(f"Error validating open position: {e}")
+        print(f"Error validating order history: {e}")
         raise
 
 def get_notification_details(driver):
@@ -167,7 +167,7 @@ def fetch_latest_order(api_url, token, position):
         print("No orders found in the API response.")
         return None
 
-    return orders[position]  # Return the most recent order
+    return orders[position]
 
 def map_order_type(api_order_type):
     """Map API order type to human-readable format."""

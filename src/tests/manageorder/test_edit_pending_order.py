@@ -3,7 +3,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import time
-from src.utils.price_utils import get_live_price
 from src.utils.constants import (
     PENDING_POSITIONS_TAB, EDIT_ORDER, EDIT_ORDER_UPDATE, EDIT_ORDER_UPDATE_CONFIRM,
     EDIT_GOOD_TILL_CANCELLED, EDIT_GOOD_TILL_DAY, EDIT_EXPIRY_DROPDOWN,
@@ -26,7 +25,7 @@ def test_edit_pending_order(driver):
         edit_button = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_ORDER)))
         edit_button.click()
-        print("Order confirmed.")
+        print("Edit confirmed.")
     
         wait = WebDriverWait(driver, 10)
         price_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_ORDER_PRICE_INPUT)))
@@ -37,20 +36,20 @@ def test_edit_pending_order(driver):
         stop_loss_price_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_ORDER_SL_INPUT)))
         stop_loss_price_field.clear()
         stop_loss_price_field.send_keys(str(new_stop_loss_price))
-        print("Order confirmed.")
+        print("Edit confirmed.")
 
         # Locate and edit the "Stop Loss Points" field
         stop_loss_points_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_ORDER_SL_POINT )))
         stop_loss_points_field.send_keys(Keys.CONTROL + "a")
         stop_loss_points_field.send_keys(Keys.DELETE)
         stop_loss_points_field.send_keys(str(new_stop_loss_points))
-        print("Order confirmed.")
+        print("Edit confirmed.")
 
         # Locate and edit the "Take Profit Price" field
         take_profit_price_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_ORDER_TP_INPUT)))
         take_profit_price_field.clear()
         take_profit_price_field.send_keys(str(new_take_profit_price))
-        print("Order confirmed.")
+        print("Edit confirmed.")
 
         # Locate and edit the "Take Profit Points" field
         take_profit_points_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_ORDER_TP_POINT)))
@@ -60,7 +59,7 @@ def test_edit_pending_order(driver):
 
         expiry_dropdown = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, EDIT_EXPIRY_DROPDOWN)))
         expiry_dropdown.click()
-        print("Order confirmed.")
+        print("Edit confirmed.")
 
         # Select "Good Till Day" or "Good Till Cancelled" 
         if new_expiry == 'Good Till Day':
@@ -75,14 +74,14 @@ def test_edit_pending_order(driver):
             EC.presence_of_element_located((By.CSS_SELECTOR, "[data-testid='edit-input-price-increase']")))
         for _ in range(20):
             price_plus.click()
-        print("Order confirmed.")
+        print("Edit confirmed.")
 
 
         update_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, EDIT_ORDER_UPDATE))
         )
         update_button.click()
-        print("Order confirmed.")
+        print("Edit confirmed.")
 
         # Click the Confirm button in the confirmation pop-up
         confirm_button = WebDriverWait(driver, 10).until(
@@ -91,5 +90,5 @@ def test_edit_pending_order(driver):
         time.sleep(5)
 
     except Exception as e:
-        print(f"Error test_edit_pending_order order: {e}")
+        print(f"Error in test_edit_pending_order: {e}")
         raise

@@ -11,11 +11,10 @@ BULK_CLOSE_LOSS_CONFIRM, BULK_CLOSE_ALL_CONFIRM, OPEN_POSITIONS_TAB
 
 def test_bulk_close(driver):
     try:
-        openposition = driver.find_element(By.CSS_SELECTOR, OPEN_POSITIONS_TAB)
-        openposition.click()
+        driver.find_element(By.CSS_SELECTOR, OPEN_POSITIONS_TAB).click()
 
-        bulk_close = driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_DROPDOWN)
-        bulk_close.click()
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, BULK_CLOSE_DROPDOWN))).click()
     
         driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_ALL).click()
 
@@ -24,7 +23,7 @@ def test_bulk_close(driver):
             EC.presence_of_element_located((By.CSS_SELECTOR, BULK_CLOSE_ALL_CONFIRM)))
         confirm_button.click()
         time.sleep(5)
-        print("Order confirmed.")
+        print("Close confirmed.")
 
         driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_PROFIT).click()
         
@@ -33,7 +32,7 @@ def test_bulk_close(driver):
             EC.presence_of_element_located((By.CSS_SELECTOR, BULK_CLOSE_LOSS_CONFIRM)))
         confirm_button.click()
         time.sleep(5)
-        print("Order confirmed.")
+        print("Close confirmed.")
 
         driver.find_element(By.CSS_SELECTOR, BULK_CLOSE_LOSS).click()
 
@@ -42,9 +41,9 @@ def test_bulk_close(driver):
             EC.presence_of_element_located((By.CSS_SELECTOR, BULK_CLOSE_PROFIT_CONFIRM)))
         confirm_button.click()
         time.sleep(5)
-        print("Order confirmed.")
+        print("Close confirmed.")
         
     
     except Exception as e:
-        print(f"Error placing {test_bulk_close} order: {e}")
+        print(f"Error in {test_bulk_close}: {e}")
         raise
