@@ -1,14 +1,14 @@
 from src.driver_setup import setup_driver
 from src.login import login
-from src.tests.placeorder.test_market_order import test_place_market_order
-from src.tests.placeorder.test_limit_order import test_place_limit_order
-from src.tests.placeorder.test_stop_order import test_place_stop_order
-from src.tests.manageorder.test_close_position import test_close_position
-from src.tests.manageorder.test_bulk_close import test_bulk_close
-from src.tests.manageorder.test_bulk_delete import test_bulk_delete
-from src.tests.manageorder.test_edit_open_position import edit_open_position
-from src.tests.manageorder.test_partial_close_position import test_patial_close
-from src.tests.manageorder.test_edit_pending_order import test_edit_pending_order
+from src.tests.create.test_market_order import test_place_market_order
+from src.tests.create.test_limit_order import test_place_limit_order
+from src.tests.create.test_stop_order import test_place_stop_order
+from src.tests.manage.test_close_position import test_close_position
+from src.tests.manage.test_bulk_close import test_bulk_close
+from src.tests.manage.test_bulk_delete import test_bulk_delete
+from src.tests.manage.test_edit_open_position import edit_open_position
+from src.tests.manage.test_partial_close_position import test_patial_close
+from src.tests.manage.test_edit_pending_order import test_edit_pending_order
 import time
 
 def main():
